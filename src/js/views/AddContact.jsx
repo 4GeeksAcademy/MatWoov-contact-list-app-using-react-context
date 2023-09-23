@@ -8,9 +8,9 @@ export const AddContact = () => {
     const addContact = () => {
         console.log('Ejecuto Bton');
         const user= {
-            full_name: "Maria",
-            email: "maria@gmail.com",
-            agenda_slug: "spain46",
+            full_name: "Pedro",
+            email: "pedro@gmail.com",
+            agenda_slug: "agenda_matwoo",
             address:"47568 NW 34ST, 33434 FL, Miami",
             phone:"7864445566"
         }

@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { Context } from "../store/appContext.js";
 
 
 export const CardContact = (props) => {
+    const { store, actions } = useContext(Context);
+
+    const deleteContact = (id) => {
+        actions.deleteContact(id);
+        actions.getUsers();
+    };
+
+
     return (
         <div className="p-3">
             <div className="border rounded d-flex p-1">
@@ -17,7 +26,7 @@ export const CardContact = (props) => {
                 </div>
                 <div className="m-3 p-2">
                 <button type="button" class="btn me-3"><i className="fas fa-pencil-alt"></i></button>
-                <button type="button" class="btn me-3"><i className="fas fa-trash-alt"></i></button>
+                <button type="button" onClick={() => deleteContact(props.id)} class="btn me-3"><i className="fas fa-trash-alt"></i></button>
                 </div>
             </div>
         </div>

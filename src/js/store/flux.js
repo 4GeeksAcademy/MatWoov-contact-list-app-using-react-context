@@ -48,6 +48,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			deleteContact: async (id) => {
+                const url = 'https://playground.4geeks.com/apis/fake/contact/' + id;
+				const options = {
+					method: 'DELETE'
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					console.log(data);
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+			},
+
 
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");

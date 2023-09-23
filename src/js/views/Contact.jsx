@@ -5,7 +5,8 @@ import { useActionData } from "react-router";
 
 
 export const Contact = () => {
-    const { store, actions } = useContext(Context)
+    const { store, actions } = useContext(Context);
+    actions.getUsers();
 
     return (
         <div className="container">
