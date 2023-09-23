@@ -1,39 +1,47 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Context } from "../store/appContext.js";
 
 
 export const AddContact = () => {
+    const { store, actions } = useContext(Context)
+
+    const addContact = () => {
+        console.log('Ejecuto Bton');
+        const user= {
+            full_name: "Maria",
+            email: "maria@gmail.com",
+            agenda_slug: "spain46",
+            address:"47568 NW 34ST, 33434 FL, Miami",
+            phone:"7864445566"
+        }
+        actions.addContact(user);
+      }
+
+
     return (
         <div>
             <h1 className="text-center p-5 mb-0">Add New Contact</h1>
             <form className="p-5">
                 <div className="mb-3">
-                    <label htmlFor="exampleInputFullName" className="form-label">Full Name</label>
-                    <input type="text" className="form-control" id="exampleInputFullName" placeholder="Full Name" />
+                    <label htmlFor="name" className="form-label">Full Name</label>
+                    <input name="name" type="text" className="form-control" placeholder="Full Name" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputEmail" className="form-label">Email</label>
-                    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Mail" />
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input name="email" type="email" className="form-control" aria-describedby="emailHelp" placeholder="Enter Mail" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputPhone" className="form-label">Phone</label>
-                    <input type="text" className="form-control" id="exampleInputPhone" placeholder="Enter Phone" />
+                    <label htmlFor="phone" className="form-label">Phone</label>
+                    <input name="phone" type="text" className="form-control" placeholder="Enter Phone" />
                 </div>
                 <div className="mb-3">
-                    <label htmlFor="exampleInputAddress" className="form-label">Address</label>
-                    <input type="text" className="form-control" id="exampleInputAddress" placeholder="Enter Address" />
+                    <label htmlFor="address" className="form-label">Address</label>
+                    <input name="address" type="text" className="form-control" placeholder="Enter Address" />
                 </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-primary" type="button">Save</button>
+                <div className="d-grid gap-2">
+                    <button className="btn btn-primary" onClick={addContact} type="button">Save</button>
                 </div>
             </form>
-            <div>
-                <Link to="/">
-                    <span className="btn btn-warning ms-5" href="#" role="button">
-                        Back home
-                    </span>
-                </Link>
-            </div>
         </div>
     )
 };

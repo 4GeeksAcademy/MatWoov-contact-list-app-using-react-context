@@ -11,6 +11,8 @@ import { Navbar } from "./component/Navbar.jsx";
 import { Footer } from "./component/Footer.jsx";
 import { CardContact } from "./component/CardContact.jsx";
 import { AddContact } from "./views/AddContact.jsx";
+import { Contact } from "./views/Contact.jsx";
+
 
 //create your first component
 const Layout = () => {
@@ -22,14 +24,14 @@ const Layout = () => {
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					{/* <Navbar /> */}
+					<Navbar />
 					<Routes>
-						<Route path="/" element={<CardContact />} />
+						<Route path="/" element={<Contact />} />
 						<Route path="/add-contact" element={<AddContact />} />
 						{/* <Route path="/single/:theid" element={<Single />} /> */}
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>
-					<Footer />
+					{/* <Footer /> */}
 				</ScrollToTop>
 			</BrowserRouter>
 		</div>
