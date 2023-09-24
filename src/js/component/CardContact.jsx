@@ -8,7 +8,6 @@ export const CardContact = (props) => {
 
     const deleteContact = (id) => {
         actions.deleteContact(id);
-        actions.getUsers();
     };
 
 
