@@ -12,6 +12,7 @@ import { Footer } from "./component/Footer.jsx";
 import { CardContact } from "./component/CardContact.jsx";
 import { AddContact } from "./views/AddContact.jsx";
 import { Contact } from "./views/Contact.jsx";
+import { EditContact } from "./views/EditContact.jsx"
 
 
 //create your first component
@@ -20,14 +21,16 @@ const Layout = () => {
 	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 	const basename = process.env.BASENAME || "";
 
+
 	return (
 		<div>
 			<BrowserRouter basename={basename}>
 				<ScrollToTop>
-					<Navbar />
+					{/* <Navbar /> */}
 					<Routes>
 						<Route path="/" element={<Contact />} />
 						<Route path="/add-contact" element={<AddContact />} />
+						<Route path="/edit-contact/:idContact" element={<EditContact />} />
 						{/* <Route path="/single/:theid" element={<Single />} /> */}
 						<Route path="*" element={<h1>Not found!</h1>} />
 					</Routes>

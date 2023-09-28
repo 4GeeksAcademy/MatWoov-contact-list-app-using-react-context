@@ -26,6 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				if (response.ok) {
 					const data = await response.json();
 					setStore({ users: data })
+					
 				} else {
 					console.log('Error: ', response.status, response.statusText)
 				}
@@ -48,6 +49,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+
 			deleteContact: async (id) => {
                 const url = 'https://playground.4geeks.com/apis/fake/contact/' + id;
 				const options = {
@@ -60,6 +62,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					console.log('Error: ', response.status, response.statusText)
 				}
+			},
+
+			updateContact: async (id, contact) => {
+				const url = 'https://playground.4geeks.com/apis/fake/contact/' + id;
+				const options = {
+					method: 'PUT',
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(contact)
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					getActions().getContact();
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+
 			},
 
 
