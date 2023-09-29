@@ -18,7 +18,7 @@ export const Contact = () => {
                     </span>
                 </Link>
                 <Link to="/add-contact">
-                    <button className="btn btn-success">Add New Contact</button>
+                    <button className="btn btn-success">Add New Contact <i className="fas fa-user-plus ms-2"></i></button>
                 </Link>
             </div>
             <div className="container">

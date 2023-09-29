@@ -51,7 +51,7 @@ export const AddContact = () => {
             <div className="p-3 d-flex justify-content-end">
                 <Link to="/">
                     <span className="btn btn-warning me-3" href="#" role="button">
-                        Contact
+                        Contact 
                     </span>
                 </Link>
             </div>

@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const response = await fetch(url, options);
 				if (response.ok) {
 					const data = await response.json();
-					getActions().getContact();
+					getActions().getUsers();
 				} else {
 					console.log('Error: ', response.status, response.statusText)
 				}

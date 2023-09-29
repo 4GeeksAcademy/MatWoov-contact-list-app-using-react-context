@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 export const EditContact = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
-    // const result = store.contacts.filter((item) => item.id === params.idContact);
-    
-
-
+    const navigate = useNavigate();
+    const result = store.users.filter((user) => user.id === params.idContact);
+    console.log(result)
 
     const [form, setForm] = useState({
         full_name: "",
@@ -17,6 +16,26 @@ export const EditContact = () => {
         address: "",
         phone: ""
     })
+
+
+    const updateContact = (event) => {
+        event.preventDefault();
+        const newContact = {
+            full_name: form.full_name,
+            email: form.email,
+            agenda_slug: "agenda_matwoo",
+            address: form.address,
+            phone: form.phone
+        }
+        console.log(newContact)
+        actions.updateContact(params.idContact, newContact);
+        navigate("/");
+    }
+
+    const cancelUpdate = () => {
+        navigate("/");
+    }
+
 
     const onChangeName = (event) => {
         setForm((currentState) => {
@@ -42,40 +61,32 @@ export const EditContact = () => {
         })
     };
 
-    const addContact = () => {
-        console.log('Ejecuto Bton');
-        const user = form;
-        actions.addContact(user);
-    }
-
 
     return (
-        <div>
-        <h1 className="text-center p-5 mb-0">Edit Contact</h1>
-        <form className="p-5">
-            <div className="mb-3">
-                <label htmlFor="name" className="form-label">Full Name</label>
-                <input name="name" type="text" onChange={onChangeName} value={form.full_name} className="form-control" placeholder="Full Name" />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input name="email" type="email" onChange={onChangeEmail} value={form.email} className="form-control" aria-describedby="emailHelp" placeholder="Enter Mail" />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="phone" className="form-label">Phone</label>
-                <input name="phone" type="text" onChange={onChangePhone} value={form.phone} className="form-control" placeholder="Enter Phone" />
-            </div>
-            <div className="mb-3">
-                <label htmlFor="address" className="form-label">Address</label>
-                <input name="address" type="text" onChange={onChangeAddress} value={form.address} className="form-control" placeholder="Enter Address" />
-            </div>
-            <div className="d-grid gap-2">
-                <Link to="/">
-                    <button className="btn btn-primary" onClick={addContact} type="button">Save</button>
-                    <p>or get back to contacts</p>
-                </Link>
-            </div>
-        </form>
-    </div>
+        <div className="container">
+            <h1 className="text-center p-5 mb-0">Edit Contact <i className="fas fa-edit ms-2"></i></h1>
+            <form className="p-5">
+                <div className="mb-3">
+                    <label htmlFor="name" className="form-label">Full Name</label>
+                    <input name="name" type="text" onChange={onChangeName} value={form.full_name} className="form-control" placeholder="Full Name" />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="email" className="form-label">Email</label>
+                    <input name="email" type="email" onChange={onChangeEmail} value={form.email} className="form-control" aria-describedby="emailHelp" placeholder="Enter Mail" />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="phone" className="form-label">Phone</label>
+                    <input name="phone" type="text" onChange={onChangePhone} value={form.phone} className="form-control" placeholder="Enter Phone" />
+                </div>
+                <div className="mb-3">
+                    <label htmlFor="address" className="form-label">Address</label>
+                    <input name="address" type="text" onChange={onChangeAddress} value={form.address} className="form-control" placeholder="Enter Address" />
+                </div>
+                <div className="d-flex justify-content-end">
+                    <button className="btn btn-primary me-3" onClick={updateContact} type="button">Save</button>
+                    <button className="btn btn-danger" onClick={cancelUpdate} type="button">Cancel</button>
+                </div>
+            </form>
+        </div>
     )
 };
