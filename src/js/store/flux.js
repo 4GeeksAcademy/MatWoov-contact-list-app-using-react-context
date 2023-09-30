@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			users: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -16,6 +17,71 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
+			getUsers: async () => {
+				const url = 'https://playground.4geeks.com/apis/fake/contact/agenda/agenda_matwoo';
+				const options = {
+					method: 'GET'
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					setStore({ users: data })
+					
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+			},
+
+			addContact: async (newUser) => {
+				const url = 'https://playground.4geeks.com/apis/fake/contact/';
+				const options = {
+					method: 'POST',
+					headers: {"Content-Type": "application/json"},
+					body: JSON.stringify(newUser)
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					console.log(data);
+					getActions().getUsers();
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+			},
+
+
+			deleteContact: async (id) => {
+                const url = 'https://playground.4geeks.com/apis/fake/contact/' + id;
+				const options = {
+					method: 'DELETE'
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					console.log(data);
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+			},
+
+			updateContact: async (id, contact) => {
+				const url = 'https://playground.4geeks.com/apis/fake/contact/' + id;
+				const options = {
+					method: 'PUT',
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify(contact)
+				}
+				const response = await fetch(url, options);
+				if (response.ok) {
+					const data = await response.json();
+					getActions().getUsers();
+				} else {
+					console.log('Error: ', response.status, response.statusText)
+				}
+
+			},
+
+
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
 			},
