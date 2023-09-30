@@ -2,21 +2,21 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext.js";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
+
 export const EditContact = () => {
     const { store, actions } = useContext(Context);
     const params = useParams();
     const navigate = useNavigate();
-    const result = store.users.filter((user) => user.id === params.idContact);
-    console.log(result)
+    const result = store.users.filter((user) => user.id == params.idContact);
+    const currentContact = result[0]
 
     const [form, setForm] = useState({
-        full_name: "",
-        email: "",
+        full_name: currentContact.full_name,
+        email: currentContact.email,
         agenda_slug: "agenda_matwoo",
-        address: "",
-        phone: ""
-    })
-
+        address: currentContact.address,
+        phone: currentContact.phone
+    });
 
     const updateContact = (event) => {
         event.preventDefault();
@@ -27,7 +27,6 @@ export const EditContact = () => {
             address: form.address,
             phone: form.phone
         }
-        console.log(newContact)
         actions.updateContact(params.idContact, newContact);
         navigate("/");
     }
